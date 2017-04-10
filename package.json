@@ -18,10 +18,16 @@
 	"webpack": "^1.12.9",
 	"webpack-dev-server": "^1.16.3"
   },
-  "devDependencies": {},
+  "devDependencies": {
+	  "jsx-loader": "^0.12.2",
+	  "http-server": "^0.8.0"
+  },
   "scripts": {
-	"dev": "webpack-dev-server --content-base src --inline --hot",
-	"test": "echo \"Error: no test specified\" && exit 1"
+    "start": "npm run serve | npm run dev",
+    "serve": "./node_modules/.bin/http-server -p 8080",
+	"dev": "./node_modules/.bin/webpack-dev-server --content-base src --inline --hot --colors --port 8090",
+    "build": "webpack --progress --colors",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Mazebeat",
   "license": "ISC"
