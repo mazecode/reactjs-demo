@@ -1,11 +1,11 @@
-var debug = process.env.NODE_ENV !== 'production';
+var debug = process.env.NODE_ENV !== "production";
 var webpack = require('webpack');
 var path = require('path');
 
 module.exports = {
-    context: path.join(__dirname, 'src'),
-    devtool: debug ? 'inline-sourcemap' : null,
-    entry: './js/client.jsx',
+    context: path.join(__dirname, "src"),
+    devtool: debug ? "inline-sourcemap" : null,
+    entry: "./js/client.jsx",
     module: {
         loaders: [
             {
@@ -14,21 +14,25 @@ module.exports = {
                 loader: 'babel-loader',
                 query: {
                     presets: ['react', 'es2015', 'stage-0'],
-                    plugins: ['react-html-attrs', 'transform-decorators-legacy', 'transform-class-properties'],
+                    plugins: ['react-html-attrs', 'transform-class-properties', 'transform-decorators-legacy'],
                 }
             }
         ]
     },
     output: {
-        path: __dirname + '/src/',
-        filename: 'client.min.js'
+        path: __dirname + "/src/",
+        filename: "client.min.js"
     },
     resolve: {
         extensions: ['', '.js', '.jsx']
+    },
+    devServer: {
+        historyApiFallback: true,
+        contentBase: './'
     },
     plugins: debug ? [] : [
         new webpack.optimize.DedupePlugin(),
         new webpack.optimize.OccurenceOrderPlugin(),
         new webpack.optimize.UglifyJsPlugin({mangle: false, sourcemap: false}),
     ],
-}
+};
