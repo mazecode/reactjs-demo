@@ -5,7 +5,7 @@ var path = require('path');
 module.exports = {
     context: path.join(__dirname, "src"),
     devtool: debug ? "inline-sourcemap" : null,
-    entry: "./js/client.jsx",
+    entry: "./js/main.jsx",
     module: {
         loaders: [
             {
@@ -21,7 +21,7 @@ module.exports = {
     },
     output: {
         path: __dirname + "/src/",
-        filename: "client.min.js"
+        filename: "main.min.js"
     },
     resolve: {
         extensions: ['', '.js', '.jsx']

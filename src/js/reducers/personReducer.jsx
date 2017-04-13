@@ -1,49 +1,25 @@
-export default function reducer(state = {
-                                    person: {},
-                                    fetching: false,
-                                    fetched: false,
-                                    error: null,
-                                }, action) {
+import {FETCH_PERSON, FETCH_PERSON_REJECTED} from "../actions/personActions";
 
-    switch (action.type) {
-        case "FETCH_PERSONS": {
-            return {...state, fetching: true}
-        }
-        case "FETCH_PERSONS_REJECTED": {
-            return {...state, fetching: false, error: action.payload}
-        }
-        case "FETCH_PERSONS_FULFILLED": {
-            return {
-                ...state,
-                fetching: false,
-                fetched: true,
-                person: action.payload,
-            }
-        }
-        case "ADD_PERSON": {
-            return {
-                ...state,
-                person: [state.person, action.payload],
-            }
-        }
-        case "UPDATE_PERSON": {
-            const {id, text} = action.payload;
-            const newPerson = [...state.person];
-            const personToUpdate = newPerson.findIndex(person => person.id === id);
-            newPerson[personToUpdate] = action.payload;
+// TODO: Initial state must be the same object (empty) that REST return
+const initialState = {
+    person: {
+        info: {},
+        results: []
+    },
+    error: null,
+};
 
-            return {
-                ...state,
-                person: newPerson,
-            }
-        }
-        case "DELETE_PERSON": {
-            return {
-                ...state,
-                person: state.person.filter(person => person.id !== action.payload),
-            }
-        }
+export default function reducer(state = initialState, action) {
+    if (typeof state === 'undefined') {
+        return (initialState);
     }
 
-    return state
+    switch (action.type) {
+        case FETCH_PERSON:
+            return Object.assign({}, state, {person: action.payload});
+        case FETCH_PERSON_REJECTED:
+            return Object.assign({}, state, {error: action.payload});
+        default:
+            return state
+    }
 }

@@ -1,31 +1,16 @@
 import axios from "axios";
 
-export function fetchPerson() {
-    return function (dispatch) {
+export const FETCH_PERSON = 'FETCH_PERSON';
+export const FETCH_PERSON_REJECTED = 'FETCH_PERSON_REJECTED';
+
+export function showPerson() {
+    return (dispatch, getState) => {
         axios.get("https://randomuser.me/api/")
             .then((response) => {
-                dispatch({type: "FETCH_PERSONS_FULFILLED", payload: response.data})
+                dispatch({type: FETCH_PERSON, payload: response.data})
             })
             .catch((err) => {
-                dispatch({type: "FETCH_PERSONS_REJECTED", payload: err})
+                dispatch({type: FETCH_PERSON_REJECTED, payload: err})
             })
     }
-}
-
-export function addPerson(id, text) {
-    return {
-        type: 'ADD_PERSON',
-        payload: {},
-    }
-}
-
-export function updatePerson(id, text) {
-    return {
-        type: 'UPDATE_PERSON',
-        payload: {},
-    }
-}
-
-export function deletePerson(id) {
-    return {type: 'DELETE_PERSON', payload: id}
 }
