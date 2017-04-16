@@ -1,7 +1,7 @@
 import axios from "axios";
 
-export const FETCH_PERSON = 'FETCH_PERSON';
-export const FETCH_PERSON_REJECTED = 'FETCH_PERSON_REJECTED';
+export const FETCH_PERSON = "FETCH_PERSON";
+export const FETCH_PERSON_REJECTED = "FETCH_PERSON_REJECTED";
 
 export function showPerson() {
     return (dispatch, getState) => {

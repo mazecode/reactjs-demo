@@ -1,24 +1,39 @@
 import React from "react";
+import {connect} from "react-redux";
 
-export default class Persons extends React.Component {
-    constructor(props) {
-        super(props);
+import {showPerson} from "../actions/personActions";
+
+function mapStateToProps(state) {
+    return {
+        person: state.person.person
+    }
+}
+
+class Person extends React.Component {
+    constructor() {
+        super();
+    }
+
+    componentWillMount() {
+        this.props.showPerson();
     }
 
     renderPersonList() {
-        return this.props.persons.results.map((person) => {
-            return (
-                <div className="card text-center" key={person.id.value}>
-                    <img className="card-img-top" src={person.picture.large} alt="Card image cap"/>
-                    <article className="card-block">
-                        <p className="card-text">{person.name.first} {person.name.last}
-                            <br />
-                            <small>{person.email}</small>
-                        </p>
-                    </article>
-                </div>
-            )
-        });
+        if (this.props.person.hasOwnProperty('results')) {
+            return this.props.person.results.map((person) => {
+                return (
+                    <div className="card text-center" key={person.id.value}>
+                        <img className="card-img-top" src={person.picture.large} alt="Card image cap"/>
+                        <article className="card-block">
+                            <p className="card-text">{person.name.first} {person.name.last}
+                                <br />
+                                <small>{person.email}</small>
+                            </p>
+                        </article>
+                    </div>
+                )
+            });
+        }
     }
 
     render() {
@@ -33,3 +48,5 @@ export default class Persons extends React.Component {
         )
     }
 }
+
+export default connect(mapStateToProps, {showPerson})(Person);

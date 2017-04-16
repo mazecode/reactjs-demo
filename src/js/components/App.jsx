@@ -1,27 +1,10 @@
 import React from "react";
-import {connect} from "react-redux";
+import Footer from "./layout/Footer";
+import Nav from "./layout/Nav";
 
-import {allBook} from "../actions/bookActions";
-import {showPerson} from "../actions/personActions";
-
-import Books from "./Books";
-import Persons from "./Person";
-
-function mapStateToProps(state) {
-    return {
-        books: state.books,
-        person: state.person.person
-    }
-}
-
-class App extends React.Component {
+export default class App extends React.Component {
     constructor() {
         super();
-    }
-
-    componentWillMount() {
-        this.props.allBook();
-        this.props.showPerson();
     }
 
     headerBlock() {
@@ -33,15 +16,25 @@ class App extends React.Component {
     };
 
     render() {
-        // console.log("MAIN", this.props, this.props.books.hasOwnProperty('error'))
+        const {location} = this.props;
+        const containerStyle = {
+            // marginTop: "60px"
+        };
         return (
             <div>
-                {this.headerBlock()}
-                <Persons persons={this.props.person}/>
-                <Books books={this.props.books}/>
+                <Nav location={location}/>
+
+                <div className="container-fluid" style={containerStyle}>
+                    <div className="row">
+                        <div className="col-12">
+                            {this.headerBlock()}
+
+                            {this.props.children}
+                        </div>
+                    </div>
+                    <Footer/>
+                </div>
             </div>
         )
     }
 }
-
-export default connect(mapStateToProps, {allBook, showPerson})(App);

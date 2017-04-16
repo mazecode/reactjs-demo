@@ -1,7 +1,7 @@
 import axios from "axios";
 
-export const ALL_BOOK = 'ALL_BOOK';
-export const ALL_BOOK_REJECTED = 'ALL_BOOK_REJECTED';
+export const ALL_BOOK = "ALL_BOOK";
+export const ALL_BOOK_REJECTED = "ALL_BOOK_REJECTED";
 
 export function allBook() {
     return (dispatch, getState) => {
