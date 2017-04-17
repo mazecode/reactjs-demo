@@ -10,8 +10,8 @@ function mapStateToProps(state) {
 }
 
 class Books extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
     }
 
     componentWillMount() {
@@ -20,7 +20,6 @@ class Books extends React.Component {
 
     renderBookItem() {
         if (this.props.books !== 'undefined' || this.props.books.books !== null) {
-            console.log(this.props)
             return this.props.books.books.map((book) => {
                 return (
                     <li key={book.id}>{book.title} - <strong>{book.author}</strong></li>
